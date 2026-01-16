@@ -1,0 +1,93 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional: Orbitron for the IARRD logotype you used */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap');
+
+:root {
+  /* semantic colors used by Tailwind variables below */
+  --bg: 10 12 16;        /* #0A0C10 */
+  --bg-soft: 17 20 26;   /* #11141A */
+  --fg: 232 234 237;     /* near-white */
+  --muted: 156 163 175;  /* gray-400 */
+  --primary: 255 255 255;
+  --accent: 59 130 246;  /* blue-500 */
+  --ring: 99 102 241;    /* indigo-500 */
+}
+
+/* Base reset + theme */
+@layer base {
+  *, *::before, *::after { @apply box-border; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    @apply antialiased;
+    color: rgb(var(--fg));
+    background:
+      radial-gradient(60rem 60rem at 120% -20%, rgba(99,102,241,0.12), transparent 60%),
+      radial-gradient(40rem 40rem at -10% 110%, rgba(59,130,246,0.10), transparent 60%),
+      rgb(var(--bg));
+    overflow-x: hidden;
+  }
+
+  /* Typography defaults */
+  h1,h2,h3,h4 { @apply tracking-tight font-semibold; }
+  h1 { @apply text-4xl sm:text-5xl md:text-6xl; }
+  h2 { @apply text-3xl sm:text-4xl; }
+  h3 { @apply text-2xl; }
+
+  p { @apply text-gray-300 leading-relaxed; }
+
+  a { @apply underline-offset-4 decoration-transparent transition-colors; }
+  a:hover { @apply decoration-current; }
+
+  /* Selections */
+  ::selection { background: rgba(59,130,246,.25); color: white; }
+
+  /* Focus ring for accessibility */
+  :focus-visible { outline: none; box-shadow: 0 0 0 3px rgba(var(--ring) / .6); border-radius: .375rem; }
+
+  /* Scrollbar (webkit) */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: rgb(var(--bg-soft)); }
+  ::-webkit-scrollbar-thumb { background: rgba(148,163,184,.35); border-radius: 9999px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(148,163,184,.55); }
+
+  /* Give sections some default vertical rhythm */
+  section { @apply py-16 sm:py-20; }
+}
+
+/* Components you can reuse in JSX */
+@layer components {
+  /* container helper if you’re not already using one */
+  .site-container { @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8; }
+
+  /* glass card */
+  .glass {
+    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl;
+  }
+
+  /* buttons */
+  .btn { @apply inline-flex items-center justify-center gap-2 rounded-lg px-5 py-2.5 font-medium transition;
+         @apply ring-0 focus-visible:ring-2 focus-visible:ring-offset-0; }
+  .btn-primary { @apply btn bg-white text-black hover:bg-gray-200; }
+  .btn-outline { @apply btn border border-white/20 text-white hover:bg-white/10; }
+
+  /* tag / pill */
+  .pill { @apply inline-flex items-center rounded-full border border-white/15 bg-white/5 px-3 py-1 text-sm text-gray-200; }
+}
+
+/* Utilities */
+@layer utilities {
+  .font-orbitron { font-family: 'Orbitron', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; }
+  .shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+  .text-shadow-lg { text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5); }
+  
+  /* 3D Flip Card Utilities */
+  .perspective-1000 { perspective: 1000px; }
+  .backface-hidden { backface-visibility: hidden; }
+  .transform-style-3d { transform-style: preserve-3d; }
+}
